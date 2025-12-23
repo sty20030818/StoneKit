@@ -1,0 +1,29 @@
+{
+	"name": "test",
+	"private": true,
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vue-tsc --noEmit && vite build",
+		"preview": "vite preview",
+		"tauri": "tauri",
+		"build:dmg": "pnpm tauri build --bundles dmg"
+	},
+	"dependencies": {
+		"@nuxt/ui": "^4.3.0",
+		"@tauri-apps/api": "^2.9.1",
+		"@tauri-apps/plugin-opener": "^2.5.2",
+		"vue": "^3.5.26",
+		"vue-router": "^4.6.4"
+	},
+	"devDependencies": {
+		"@tailwindcss/vite": "^4.1.18",
+		"@tauri-apps/cli": "^2.9.6",
+		"@vitejs/plugin-vue": "^6.0.3",
+		"tailwindcss": "^4.1.18",
+		"typescript": "~5.9.3",
+		"vite": "^8.0.0-beta.4",
+		"vue-tsc": "^3.2.1"
+	}
+}
