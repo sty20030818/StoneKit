@@ -1,6 +1,3 @@
-import { createApp } from 'vue'
-import ui from '@nuxt/ui/vue-plugin'
-import App from './App.vue'
-import './assets/main.css'
+import { mountApp } from './app/main'
 
-createApp(App).use(ui).mount('#app')
+mountApp()

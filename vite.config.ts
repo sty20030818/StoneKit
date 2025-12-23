@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 import ui from '@nuxt/ui/vite'
 
-// @ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST
 
 // https://vite.dev/config/
@@ -24,7 +23,7 @@ export default defineConfig(async () => ({
 					protocol: 'ws',
 					host,
 					port: 5174,
-			  }
+				}
 			: undefined,
 		watch: {
 			// 3. tell Vite to ignore watching `src-tauri`

@@ -1,6 +1,7 @@
 # StoneKit
 
-石头鱼的工具箱（Tauri + Vue）。当前提供 SVG 文本转换为 Base64 / Data URL 的本地工具。
+石头鱼的工具箱（Tauri + Vue）。当前提供 SVG 文本转换为 Base64 / Data
+URL 的本地工具。
 
 ## 功能
 
