@@ -33,7 +33,7 @@
 					class="relative flex items-center bg-white/60 backdrop-blur-xl border border-white/60 rounded-full px-6 py-4 shadow-sm transition-all focus-within:shadow-md focus-within:scale-[1.02]">
 					<UIcon
 						:class="['size-5 mr-3 opacity-50', theme.accentText]"
-						name="i-lucide-search" />
+						:name="IconSearch" />
 					<input
 						type="text"
 						placeholder="搜索工具 (例如: SVG, 正则, 阴影...)"
@@ -63,7 +63,7 @@
 								theme.primary,
 							]">
 							<UIcon
-								name="i-lucide-code"
+								:name="IconCode"
 								class="size-7" />
 						</div>
 						<h3 :class="['text-3xl font-bold mb-2', theme.primaryText]">SVG 转 Base64</h3>
@@ -76,7 +76,7 @@
 						class="flex items-center gap-2 font-bold text-sm uppercase tracking-wider opacity-40 group-hover:opacity-100 transition-opacity">
 						<span>立即开始</span>
 						<UIcon
-							name="i-lucide-arrow-left"
+							:name="IconArrowLeft"
 							class="size-4 rotate-180" />
 					</div>
 				</div>
@@ -89,7 +89,7 @@
 				<div class="h-full flex flex-col justify-between opacity-50 group-hover:opacity-80 transition-opacity">
 					<div :class="['w-10 h-10 rounded-xl bg-gray-200/50 flex items-center justify-center', theme.accentText]">
 						<UIcon
-							name="i-lucide-sparkles"
+							:name="IconSparkles"
 							class="size-5" />
 					</div>
 					<div>
@@ -105,7 +105,7 @@
 				<div class="h-full flex flex-col justify-between">
 					<div :class="['w-10 h-10 rounded-xl bg-gray-200/50 flex items-center justify-center', theme.accentText]">
 						<UIcon
-							name="i-lucide-cpu"
+							:name="IconCpu"
 							class="size-5" />
 					</div>
 					<div>
@@ -121,7 +121,7 @@
 				<div class="h-full flex flex-col justify-between opacity-50">
 					<div :class="['w-10 h-10 rounded-xl bg-gray-200/50 flex items-center justify-center', theme.accentText]">
 						<UIcon
-							name="i-lucide-image"
+							:name="IconImage"
 							class="size-5" />
 					</div>
 					<div>
@@ -135,6 +135,13 @@
 </template>
 
 <script setup lang="ts">
+	import IconArrowLeft from '~icons/lucide/arrow-left'
+	import IconCode from '~icons/lucide/code'
+	import IconCpu from '~icons/lucide/cpu'
+	import IconImage from '~icons/lucide/image'
+	import IconSearch from '~icons/lucide/search'
+	import IconSparkles from '~icons/lucide/sparkles'
+
 	import { storeToRefs } from 'pinia'
 	import { useRouter } from 'vue-router'
 

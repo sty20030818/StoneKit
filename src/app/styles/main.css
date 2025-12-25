@@ -98,3 +98,29 @@ body {
 	opacity: 1;
 	transform: translateY(0) scale(1);
 }
+
+/* 全局隐藏滚动条（仍可滚动，但不显示滚动条） */
+html,
+body {
+	-ms-overflow-style: none; /* IE/旧 Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+	display: none; /* Chrome/Safari */
+	width: 0;
+	height: 0;
+}
+
+/* 组件级滚动条同样隐藏（包括 div/textarea 等） */
+* {
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE/旧 Edge */
+}
+
+*::-webkit-scrollbar {
+	display: none;
+	width: 0;
+	height: 0;
+}

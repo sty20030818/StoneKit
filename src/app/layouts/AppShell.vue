@@ -30,7 +30,7 @@
 						theme.primary,
 					]">
 					<UIcon
-						name="i-lucide-zap"
+						:name="IconZap"
 						class="size-5" />
 				</div>
 				<span :class="['text-xl font-bold tracking-tight hidden md:block', theme.primaryText]">
@@ -72,6 +72,8 @@
 </template>
 
 <script setup lang="ts">
+	import IconZap from '~icons/lucide/zap'
+
 	import { storeToRefs } from 'pinia'
 	import { RouterView, useRoute, useRouter } from 'vue-router'
 

@@ -8,7 +8,7 @@
 				class="p-3 rounded-full bg-white/50 hover:bg-white border border-white/60 shadow-sm transition-all hover:scale-105 active:scale-95"
 				@click="router.push('/')">
 				<UIcon
-					name="i-lucide-arrow-left"
+					:name="IconArrowLeft"
 					class="size-5" />
 			</UButton>
 			<h2 :class="['text-2xl font-bold', theme.primaryText]">SVG 编码工厂</h2>
@@ -42,7 +42,7 @@
 						class="px-4 py-1.5 rounded-full font-bold flex items-center gap-1"
 						@click="triggerFileUpload">
 						<UIcon
-							name="i-lucide-upload"
+							:name="IconUpload"
 							class="size-3" />
 						上传文件
 					</UButton>
@@ -90,7 +90,7 @@
 								key="empty"
 								class="text-center opacity-30">
 								<UIcon
-									name="i-lucide-maximize-2"
+									:name="IconMaximize2"
 									class="size-12 mx-auto mb-2" />
 								<p>等待输入...</p>
 							</div>
@@ -134,11 +134,11 @@
 								@click="copyToClipboard('url')">
 								<UIcon
 									v-if="copyStatus === 'url'"
-									name="i-lucide-check"
+									:name="IconCheck"
 									class="size-4 text-green-600" />
 								<UIcon
 									v-else
-									name="i-lucide-copy"
+									:name="IconCopy"
 									class="size-4" />
 								<span>复制 URL</span>
 							</UButton>
@@ -152,7 +152,7 @@
 								@click="copyToClipboard('css')">
 								<UIcon
 									v-if="copyStatus === 'css'"
-									name="i-lucide-check"
+									:name="IconCheck"
 									class="size-4" />
 								<span v-else>CSS</span>
 							</UButton>
@@ -165,6 +165,12 @@
 </template>
 
 <script setup lang="ts">
+	import IconArrowLeft from '~icons/lucide/arrow-left'
+	import IconCheck from '~icons/lucide/check'
+	import IconCopy from '~icons/lucide/copy'
+	import IconMaximize2 from '~icons/lucide/maximize-2'
+	import IconUpload from '~icons/lucide/upload'
+
 	import { ref, watch } from 'vue'
 	import { storeToRefs } from 'pinia'
 	import { useToast } from '@nuxt/ui/composables'
