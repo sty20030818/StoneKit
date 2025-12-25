@@ -1,5 +1,5 @@
 <template>
-	<div class="max-w-5xl mx-auto h-[85vh] flex flex-col animate-in-zoom">
+	<div class="max-w-5xl mx-auto h-full flex flex-col animate-in-zoom min-h-0">
 		<!-- 顶部控制栏 -->
 		<div class="flex items-center gap-4 mb-6">
 			<UButton
@@ -15,7 +15,7 @@
 		</div>
 
 		<!-- 工作区 -->
-		<div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 pb-6">
+		<div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 pb-6 min-h-0">
 			<!-- 左侧：输入区 -->
 			<div
 				:class="[
@@ -56,12 +56,12 @@
 
 				<textarea
 					v-model="svgInput"
-					class="w-full h-full bg-transparent p-6 rounded-[28px] resize-none outline-none text-sm font-mono text-gray-700 placeholder-gray-400 focus:bg-white/50 transition-colors no-scrollbar"
+					class="w-full flex-1 min-h-0 overflow-auto bg-transparent p-6 rounded-[28px] resize-none outline-none text-sm font-mono text-gray-700 placeholder-gray-400 focus:bg-white/50 transition-colors no-scrollbar"
 					:placeholder="isDragging ? '松手即可导入...' : '粘贴 SVG 代码，或者把文件拖进来...'" />
 			</div>
 
 			<!-- 右侧：预览与输出 -->
-			<div class="flex flex-col gap-6">
+			<div class="flex flex-col gap-6 min-h-0">
 				<!-- 预览卡片 -->
 				<div
 					class="flex-1 rounded-[32px] bg-white/70 backdrop-blur-xl border border-white/60 shadow-lg relative overflow-hidden flex flex-col">
@@ -84,7 +84,7 @@
 								:key="dataUrl"
 								:src="dataUrl"
 								alt="Preview"
-								class="max-h-48 max-w-full drop-shadow-2xl" />
+								class="max-h-48 max-w-full drop-shadow-xl" />
 							<div
 								v-else
 								key="empty"
@@ -107,7 +107,7 @@
 				</div>
 
 				<!-- 输出与复制操作 -->
-				<div :class="['rounded-[32px] p-6 text-white shadow-xl relative overflow-hidden', theme.primary]">
+				<div :class="['rounded-[32px] p-6 text-white shadow-lg relative overflow-hidden', theme.primary]">
 					<div
 						class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
 

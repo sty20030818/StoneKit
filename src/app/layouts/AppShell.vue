@@ -1,7 +1,7 @@
 <template>
 	<div
 		:class="[
-			'min-h-screen w-full relative overflow-hidden transition-colors duration-700 bg-linear-to-br font-sans selection:text-white',
+			'h-dvh w-full relative overflow-hidden flex flex-col transition-colors duration-700 bg-linear-to-br font-sans selection:text-white',
 			theme.gradient,
 			theme.selectionBg,
 		]">
@@ -57,13 +57,13 @@
 		</nav>
 
 		<!-- 主要内容区域 -->
-		<main class="relative z-10 px-4 md:px-12 pb-12">
+		<main class="relative z-10 px-4 md:px-12 pb-12 flex-1 overflow-hidden">
 			<Transition
 				name="view"
 				mode="out-in">
 				<div
 					:key="route.fullPath"
-					class="will-change-transform">
+					class="will-change-transform h-full">
 					<RouterView />
 				</div>
 			</Transition>

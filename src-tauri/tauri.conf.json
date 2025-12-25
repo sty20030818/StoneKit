@@ -14,7 +14,9 @@
 			{
 				"title": "石头鱼的工具箱",
 				"width": 1400,
-				"height": 1000
+				"height": 1000,
+				"minWidth": 1100,
+				"minHeight": 760
 			}
 		],
 		"security": {
