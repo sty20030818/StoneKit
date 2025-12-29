@@ -12,11 +12,11 @@
 	"app": {
 		"windows": [
 			{
-				"title": "石头鱼的工具箱",
+				"title": "StoneKit",
 				"width": 1400,
 				"height": 1000,
 				"minWidth": 1100,
-				"minHeight": 760
+				"minHeight": 780
 			}
 		],
 		"security": {

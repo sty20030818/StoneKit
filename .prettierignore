@@ -9,5 +9,3 @@ src-tauri/.cargo
 pnpm-lock.yaml
 
 .env*
-
-

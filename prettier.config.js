@@ -11,7 +11,7 @@ export default {
 	// 使用单引号
 	singleQuote: true,
 	// 对象属性引号策略：consistent = 如果有一个属性需要引号，则所有属性都加引号
-	quoteProps: 'consistent',
+	quoteProps: 'as-needed',
 	// 在多行结构的最后一个元素后也加尾随逗号
 	trailingComma: 'all',
 	// 对象花括号内保留空格：{ foo: bar }
