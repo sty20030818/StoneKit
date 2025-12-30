@@ -1,14 +1,14 @@
 <template>
-	<div class="mx-auto max-w-7xl space-y-8 pb-12">
+	<div class="max-w-[1400px] mx-auto p-6 md:p-8 min-h-full flex flex-col">
 		<!-- 可选头部区域 -->
 		<header
 			v-if="$slots.header"
-			class="space-y-6">
+			class="mb-8">
 			<slot name="header" />
 		</header>
 
 		<!-- 主体区域 -->
-		<main class="space-y-6">
+		<main class="flex-1">
 			<slot />
 		</main>
 	</div>

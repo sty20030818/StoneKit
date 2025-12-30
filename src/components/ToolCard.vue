@@ -1,76 +1,48 @@
 <template>
-	<UCard
-		:ui="{
-			root: [
-				'group relative bg-white p-4 rounded-[24px] border border-slate-100/80 transition-all duration-500 cursor-pointer hover:-translate-y-1 hover:shadow-elevation-3 active:scale-[0.99] active:translate-y-0 min-h-[168px] divide-y-0',
-				empty ? 'border-dashed border-slate-300/80 bg-white/40 hover:bg-white/70' : '',
-			].join(' '),
-			// empty 状态下：隐藏 header，只在 body 里做居中
-			header: empty ? 'hidden p-0 m-0' : '',
-			body: empty ? 'flex items-center justify-center h-full p-0' : '',
-		}"
+	<!-- Empty 状态 -->
+	<div
+		v-if="empty"
+		class="group relative bg-white/40 p-6 rounded-[28px] border border-dashed border-slate-300/80 hover:bg-white/70 transition-all duration-300 cursor-pointer hover:-translate-y-1.5 active:scale-[0.98] min-h-[168px] flex items-center justify-center"
 		@click="handleClick">
-		<!-- header slot：可由父组件自定义；未提供时，仅在非 empty 且有 tool 时渲染默认头部 -->
-		<template #header>
-			<!-- 父组件自定义 header 时，优先使用外部内容 -->
-			<slot
-				v-if="$slots.header"
-				name="header" />
+		<UIcon
+			name="i-lucide-plus"
+			class="size-10 text-slate-300 group-hover:text-teal-500 transition-colors" />
+	</div>
 
-			<!-- 默认 header：只有在非 empty 且存在 tool 时展示 -->
+	<!-- 正常工具卡片 -->
+	<div
+		v-else-if="tool"
+		class="group relative bg-white p-6 rounded-[28px] border border-slate-100/80 shadow-sm transition-all duration-300 cursor-pointer hover:-translate-y-1.5 hover:bg-white/90 active:scale-[0.98]"
+		:class="[getToolBorderClass(tool.id), getToolShadowClass(tool.id)]"
+		@click="handleClick">
+		<div class="flex items-start justify-between mb-5">
+			<!-- Icon Container with Bouncy Animation -->
 			<div
-				v-else-if="!empty && tool"
-				class="flex items-start justify-between">
-				<div
-					:class="[
-						'w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 ease-out group-hover:rotate-12 group-hover:scale-110 shadow-sm relative overflow-hidden',
-						getToolColorClass(tool.id),
-					]">
+				class="w-14 h-14 rounded-[20px] flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-3 shadow-sm ring-4 ring-transparent group-hover:ring-white/50"
+				:class="getToolColorClass(tool.id)">
+				<UIcon
+					:name="tool.icon"
+					class="size-6 transition-transform duration-300 group-hover:scale-110" />
+			</div>
+
+			<!-- Arrow with Fade & Slide -->
+			<div
+				class="opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out delay-75">
+				<div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-teal-500 shadow-sm">
 					<UIcon
-						:name="tool.icon"
-						class="size-5 relative z-10" />
-					<div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+						name="i-lucide-arrow-right"
+						class="size-4" />
 				</div>
-
-				<UButton
-					variant="ghost"
-					color="gray"
-					size="xs"
-					icon="i-lucide-star"
-					:class="[
-						'size-8 rounded-full bg-white/80 backdrop-blur',
-						isFavorite(tool.id) ? 'text-amber-500' : 'text-slate-400/70',
-					]"
-					:title="isFavorite(tool.id) ? '取消收藏' : '收藏'"
-					square
-					@click.prevent.stop="toggleFavorite(tool.id)" />
 			</div>
-		</template>
+		</div>
 
-		<!-- 默认主体内容：支持父组件自定义；否则根据 empty / tool 渲染默认内容 -->
-		<template #default>
-			<!-- 若父组件提供 default slot，则完全交给父组件渲染 -->
-			<slot v-if="$slots.default" />
-
-			<!-- Empty 状态默认内容 -->
-			<UIcon
-				v-else-if="empty"
-				name="i-lucide-plus"
-				class="size-10 text-slate-300 group-hover:text-teal-500 transition-colors" />
-
-			<!-- 正常工具卡片默认内容 -->
-			<div
-				v-else-if="tool"
-				class="space-y-1.5">
-				<h3 class="text-base font-bold text-slate-800 mb-1.5 group-hover:text-teal-600 transition-colors">
-					{{ tool.name }}
-				</h3>
-				<p class="text-slate-400 text-sm leading-relaxed line-clamp-2 group-hover:text-slate-500 transition-colors">
-					{{ tool.description }}
-				</p>
-			</div>
-		</template>
-	</UCard>
+		<h3 class="text-base font-bold text-slate-700 mb-1 group-hover:text-teal-600 transition-colors">
+			{{ tool.name }}
+		</h3>
+		<p class="text-slate-400 text-xs leading-relaxed line-clamp-2 group-hover:text-slate-500 transition-colors">
+			{{ tool.description }}
+		</p>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -78,9 +50,8 @@
 	import { useRouter } from 'vue-router'
 
 	import type { ToolItem } from '../shared/types/tool'
-	import { useToolFavoritesStore } from '../stores/toolFavorites'
 
-	interface Props {
+	type Props = {
 		tool?: ToolItem
 		empty?: boolean
 	}
@@ -97,9 +68,6 @@
 	const tool = computed(() => props.tool)
 	const empty = computed(() => props.empty)
 
-	const favoritesStore = useToolFavoritesStore()
-	const { isFavorite, toggleFavorite } = favoritesStore
-
 	function handleClick() {
 		if (props.empty) {
 			emit('click')
@@ -112,15 +80,43 @@
 
 	function getToolColorClass(toolId: string): string {
 		const colorMap: Record<string, string> = {
-			'json-format': 'tool-color-blue',
-			'base64-encoder': 'tool-color-indigo',
-			'regex-tester': 'tool-color-amber',
-			'image-compress': 'tool-color-rose',
-			'css-generator': 'tool-color-purple',
-			'color-extract': 'tool-color-pink',
-			'md5-hash': 'tool-color-emerald',
-			'svg-base64': 'tool-color-teal',
+			'json-format': 'bg-blue-50 text-blue-600',
+			'base64-encoder': 'bg-indigo-50 text-indigo-600',
+			'regex-tester': 'bg-amber-50 text-amber-600',
+			'image-compress': 'bg-rose-50 text-rose-600',
+			'css-generator': 'bg-purple-50 text-purple-600',
+			'color-extract': 'bg-pink-50 text-pink-600',
+			'md5-hash': 'bg-emerald-50 text-emerald-600',
+			'svg-base64': 'bg-teal-50 text-teal-600',
 		}
-		return colorMap[toolId] || 'tool-color-slate'
+		return colorMap[toolId] || 'bg-slate-50 text-slate-600'
+	}
+
+	function getToolBorderClass(toolId: string): string {
+		const borderMap: Record<string, string> = {
+			'json-format': 'hover:border-blue-200',
+			'base64-encoder': 'hover:border-indigo-200',
+			'regex-tester': 'hover:border-amber-200',
+			'image-compress': 'hover:border-rose-200',
+			'css-generator': 'hover:border-purple-200',
+			'color-extract': 'hover:border-pink-200',
+			'md5-hash': 'hover:border-emerald-200',
+			'svg-base64': 'hover:border-teal-200',
+		}
+		return borderMap[toolId] || 'hover:border-slate-200'
+	}
+
+	function getToolShadowClass(toolId: string): string {
+		const shadowMap: Record<string, string> = {
+			'json-format': 'hover:shadow-blue-500/20',
+			'base64-encoder': 'hover:shadow-indigo-500/20',
+			'regex-tester': 'hover:shadow-amber-500/20',
+			'image-compress': 'hover:shadow-rose-500/20',
+			'css-generator': 'hover:shadow-purple-500/20',
+			'color-extract': 'hover:shadow-pink-500/20',
+			'md5-hash': 'hover:shadow-emerald-500/20',
+			'svg-base64': 'hover:shadow-teal-500/20',
+		}
+		return shadowMap[toolId] || 'hover:shadow-slate-500/20'
 	}
 </script>

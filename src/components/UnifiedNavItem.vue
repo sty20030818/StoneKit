@@ -1,42 +1,44 @@
 <template>
-	<UButton
+	<RouterLink
 		:to="to"
-		variant="ghost"
+		class="w-full flex items-center gap-3 px-4 py-3.5 rounded-full transition-all duration-300 group relative overflow-hidden active:scale-[0.98] mb-1.5"
 		:class="[
-			'w-full flex items-center gap-3 px-3 py-2.5 mb-1.5 rounded-full group relative',
 			active
-				? 'text-teal-700 bg-teal-500/12 ring-1 ring-teal-500/15'
-				: 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/60',
-		]"
-		:style="{ transition: 'background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease' }">
-		<!-- Icon with subtle shift -->
+				? 'text-white shadow-lg shadow-teal-500/20 translate-x-1'
+				: 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 hover:shadow-sm hover:translate-x-0.5',
+		]">
+		<!-- Active Background -->
+		<div
+			v-if="active"
+			class="absolute inset-0 bg-linear-to-r from-teal-400 to-emerald-400 rounded-full" />
+
+		<!-- Icon -->
 		<span
-			:class="[active ? 'text-teal-700' : 'group-hover:text-teal-600']"
-			style="transition: color 0.15s ease">
+			class="relative z-10 transition-transform duration-300"
+			:class="active ? 'scale-110' : 'group-hover:scale-110 group-hover:rotate-6'">
 			<UIcon
 				:name="icon"
 				class="size-[18px]" />
 		</span>
 
-		<!-- Text with subtle shift -->
+		<!-- Label -->
 		<span
-			:class="['text-sm truncate z-10', active ? 'font-semibold' : 'font-medium']"
-			style="transition: color 0.15s ease">
+			class="relative z-10 text-sm font-bold tracking-wide transition-all duration-300"
+			:class="active ? 'translate-x-1' : ''">
 			{{ label }}
 		</span>
 
-		<!-- Right Indicator -->
+		<!-- Indicator -->
 		<div
 			v-if="active"
-			class="absolute right-3 flex items-center"
-			style="transition: opacity 0.15s ease">
-			<div class="w-1.5 h-1.5 bg-teal-600 rounded-full" />
-		</div>
-	</UButton>
+			class="absolute right-4 w-2 h-2 bg-white rounded-full animate-pulse shadow-sm" />
+	</RouterLink>
 </template>
 
 <script setup lang="ts">
-	interface Props {
+	import { RouterLink } from 'vue-router'
+
+	type Props = {
 		icon: string
 		label: string
 		active: boolean

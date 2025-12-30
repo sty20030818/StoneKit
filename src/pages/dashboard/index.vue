@@ -1,16 +1,20 @@
 <template>
 	<PageLayout>
 		<template #header>
-			<DashboardHeroSection
-				:hero-now="heroNow"
-				:tools-count="heroStats.tools"
-				@all-tools="goAllTools"
-				@open-search="openSearch" />
+			<div class="animate-slideUp">
+				<DashboardHeroSection
+					:hero-now="heroNow"
+					:tools-count="heroStats.tools"
+					@all-tools="goAllTools"
+					@open-search="openSearch" />
+			</div>
 		</template>
 
-		<DashboardToolGrid
-			:tools="hotTools"
-			@open-picker="openAddToolPicker" />
+		<div class="animate-slideUp">
+			<DashboardToolGrid
+				:tools="hotTools"
+				@open-picker="openAddToolPicker" />
+		</div>
 
 		<ToolFavoritesPicker
 			:open="isPickerOpen"

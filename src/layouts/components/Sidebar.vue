@@ -1,17 +1,36 @@
 <template>
-	<aside class="w-[280px] flex flex-col overflow-hidden">
-		<div class="flex-none p-6 pb-4">
+	<aside
+		class="w-[270px] shrink-0 my-4 ml-4 flex flex-col z-50 rounded-[36px] bg-white/70 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-white/50 transition-all hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)]">
+		<!-- Logo -->
+		<div class="h-24 flex items-center px-7">
 			<div
-				class="flex items-center gap-3 px-2 mb-8 cursor-pointer"
+				class="flex items-center gap-3 cursor-pointer group active:scale-95 transition-transform"
 				@click="$router.push('/')">
-				<UIcon name="i-lucide-box" />
+				<div class="relative">
+					<div
+						class="w-10 h-10 bg-linear-to-tr from-teal-400 to-emerald-400 rounded-xl flex items-center justify-center text-white font-bold shadow-lg shadow-teal-500/20 transition-all duration-500 group-hover:rotate-360 group-hover:scale-110">
+						<UIcon
+							name="i-lucide-box"
+							class="size-5" />
+					</div>
+					<div
+						class="absolute -bottom-1 -right-1 w-3 h-3 bg-white rounded-full flex items-center justify-center shadow-sm">
+						<div class="w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse" />
+					</div>
+				</div>
 				<div>
-					<span class="block">StoneKit</span>
-					<span class="block">Toolbox v1.0.0</span>
+					<span class="text-xl font-extrabold text-slate-700 tracking-tight block">StoneKit</span>
+					<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block pl-0.5">
+						Toolbox v1.0.0
+					</span>
 				</div>
 			</div>
+		</div>
 
-			<div class="space-y-2">
+		<!-- Nav -->
+		<div class="flex-1 overflow-y-auto px-5 py-2 custom-scrollbar">
+			<div class="mb-8">
+				<p class="px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 opacity-80">概览</p>
 				<UnifiedNavItem
 					icon="i-lucide-home"
 					label="仪表盘"
@@ -23,25 +42,13 @@
 					:active="isActive('/tools')"
 					to="/tools" />
 			</div>
-		</div>
 
-		<div class="flex-1 overflow-y-auto px-5 py-2">
-			<div
-				v-for="group in toolGroups"
-				:key="group.id"
-				class="mb-6">
+			<div>
+				<p class="px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 opacity-80">工具箱</p>
 				<div
-					class="flex items-center justify-between px-3 py-1 mb-2 cursor-pointer"
-					@click="toggleCategory(group.id)">
-					<span>{{ group.label }}</span>
-					<UIcon name="i-lucide-chevron-down" />
-				</div>
-
-				<div
-					:class="[
-						'space-y-1 overflow-hidden',
-						expandedCategories[group.id] ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0',
-					]">
+					v-for="group in toolGroups"
+					:key="group.id"
+					class="mb-4">
 					<UnifiedNavItem
 						v-for="tool in group.items"
 						:key="tool.id"
@@ -53,30 +60,34 @@
 			</div>
 		</div>
 
-		<div class="flex-none p-4 mx-2">
-			<UCard>
-				<div class="flex items-center gap-3">
-					<UAvatar
-						:src="userAvatar"
-						alt="avatar"
-						size="md" />
-					<div class="flex flex-col flex-1 min-w-0">
-						<span class="truncate">石头鱼</span>
-						<span>全栈工程师</span>
-					</div>
-					<UButton
-						variant="ghost"
-						size="xs"
-						icon="i-lucide-settings"
-						square />
+		<!-- User Profile -->
+		<div class="p-5">
+			<div
+				class="flex items-center gap-3 p-2.5 rounded-full bg-white/50 border border-white hover:bg-white hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all cursor-pointer group">
+				<UAvatar
+					:src="userAvatar"
+					alt="avatar"
+					size="sm"
+					class="group-hover:scale-105 transition-transform" />
+				<div class="flex flex-col overflow-hidden flex-1 min-w-0">
+					<span class="text-xs font-bold text-slate-700 truncate group-hover:text-teal-600 transition-colors">
+						石头鱼
+					</span>
+					<span class="text-[10px] text-slate-400 truncate">全栈工程师</span>
 				</div>
-			</UCard>
+				<div
+					class="ml-auto p-1.5 rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors">
+					<UIcon
+						name="i-lucide-settings"
+						class="size-3.5 group-hover:rotate-90 transition-transform duration-500" />
+				</div>
+			</div>
 		</div>
 	</aside>
 </template>
 
 <script setup lang="ts">
-	import { computed, ref } from 'vue'
+	import { computed } from 'vue'
 	import { useRoute } from 'vue-router'
 
 	import UnifiedNavItem from '../../components/UnifiedNavItem.vue'
@@ -97,13 +108,6 @@
 
 		return Array.from(map.entries()).map(([id, items]) => ({ id, label: id, items }))
 	})
-
-	// 分类展开/收起状态
-	const expandedCategories = ref<Record<string, boolean>>(Object.fromEntries(toolGroups.value.map((g) => [g.id, true])))
-
-	function toggleCategory(categoryId: string) {
-		expandedCategories.value[categoryId] = !expandedCategories.value[categoryId]
-	}
 
 	function isActive(path: string) {
 		return route.path === path
