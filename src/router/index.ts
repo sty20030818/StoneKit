@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import DashboardPage from '../pages/DashboardPage.vue'
-import SvgConverterPage from '../pages/SvgConverterPage.vue'
+import DashboardPage from '../pages/dashboard/index.vue'
+import SvgConverterPage from '../pages/svg-converter/index.vue'
 import ToolsPage from '../pages/ToolsPage.vue'
 import PlaceholderPage from '../pages/PlaceholderPage.vue'
 

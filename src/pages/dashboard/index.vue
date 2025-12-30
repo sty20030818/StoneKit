@@ -23,9 +23,11 @@
 </template>
 
 <script setup lang="ts">
-	import PageLayout from '../shared/components/PageLayout.vue'
-	import { DashboardHeroSection, DashboardToolGrid, useDashboard } from '../features/dashboard'
-	import { ToolFavoritesPicker } from '../features/tool-favorites'
+	import PageLayout from '../../shared/components/PageLayout.vue'
+	import DashboardHeroSection from './components/HeroSection.vue'
+	import DashboardToolGrid from './components/ToolGrid.vue'
+	import ToolFavoritesPicker from './components/ToolPicker.vue'
+	import { useDashboard } from './composables/useDashboard'
 
 	const {
 		heroNow,

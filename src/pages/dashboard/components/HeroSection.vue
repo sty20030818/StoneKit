@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-	interface Props {
+	type Props = {
 		heroNow: string
 		toolsCount: number
 	}

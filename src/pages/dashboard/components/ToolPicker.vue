@@ -53,7 +53,7 @@
 	import type { ToolItem } from '../../../shared/types/tool'
 	import EmptyState from '../../../shared/components/EmptyState.vue'
 
-	interface Props {
+	type Props = {
 		open: boolean
 		pickableTools: ToolItem[]
 		allCount: number
