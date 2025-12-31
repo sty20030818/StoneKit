@@ -2,18 +2,18 @@
 	<PageLayout>
 		<template #header>
 			<div class="animate-slideUp">
-			<DashboardHeroSection
-				:hero-now="heroNow"
-				:tools-count="heroStats.tools"
-				@all-tools="goAllTools"
-				@open-search="openSearch" />
+				<DashboardHeroSection
+					:hero-now="heroNow"
+					:tools-count="heroStats.tools"
+					@all-tools="goAllTools"
+					@open-search="openSearch" />
 			</div>
 		</template>
 
 		<div class="animate-slideUp">
-		<DashboardToolGrid
-			:tools="hotTools"
-			@open-picker="openAddToolPicker" />
+			<DashboardToolGrid
+				:tools="hotTools"
+				@open-picker="openAddToolPicker" />
 		</div>
 
 		<ToolFavoritesPicker
