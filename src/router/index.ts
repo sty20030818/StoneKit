@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import DashboardPage from '../pages/dashboard/index.vue'
-import SvgConverterPage from '../pages/svg-converter/index.vue'
-import ToolsPage from '../pages/ToolsPage.vue'
-import PlaceholderPage from '../pages/PlaceholderPage.vue'
+import DashboardPage from '@/pages/dashboard/index.vue'
+import SvgConverterPage from '@/pages/svg-converter/index.vue'
+import ToolsPage from '@/pages/ToolsPage.vue'
+import PlaceholderPage from '@/pages/PlaceholderPage.vue'
 
 export const router = createRouter({
 	history: createWebHistory(),
@@ -11,7 +11,7 @@ export const router = createRouter({
 		{ path: '/', name: 'dashboard', component: DashboardPage },
 		{ path: '/tools', name: 'tools', component: ToolsPage },
 		{ path: '/svg-converter', name: 'svg-converter', component: SvgConverterPage },
-		// 占位路由，避免路由警告
+		// 占位路由：用于未实现的工具页面，避免路由警告
 		{ path: '/json-format', name: 'json-format', component: PlaceholderPage },
 		{ path: '/base64-encoder', name: 'base64-encoder', component: PlaceholderPage },
 		{ path: '/regex-tester', name: 'regex-tester', component: PlaceholderPage },

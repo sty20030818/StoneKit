@@ -1,30 +1,31 @@
 <template>
 	<RouterLink
 		:to="to"
-		class="w-full flex items-center gap-3 px-4 py-3.5 rounded-full transition-all duration-300 group relative overflow-hidden active:scale-[0.98] mb-1.5"
+		class="w-full flex items-center gap-3 px-4 py-3.5 rounded-full transition-all duration-300 ease-out group relative active:scale-[0.98] mb-1.5"
 		:class="[
 			active
-				? 'text-white shadow-lg shadow-teal-500/20 translate-x-1'
-				: 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 hover:shadow-sm hover:translate-x-0.5',
+				? 'text-white shadow-[inset_0_2px_8px_rgba(20,184,166,0.2),0_2px_8px_rgba(20,184,166,0.25)]'
+				: 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 hover:shadow-sm',
 		]">
 		<!-- Active Background -->
 		<div
-			v-if="active"
-			class="absolute inset-0 bg-linear-to-r from-teal-400 to-emerald-400 rounded-full" />
+			class="absolute inset-0 bg-linear-to-r from-teal-400 to-emerald-400 rounded-full overflow-hidden"
+			:class="active ? 'opacity-100' : 'opacity-0'" />
 
 		<!-- Icon -->
 		<span
-			class="relative z-10 transition-transform duration-300"
+			class="relative z-10 transition-transform duration-300 ease-out"
 			:class="active ? 'scale-110' : 'group-hover:scale-110 group-hover:rotate-6'">
 			<UIcon
 				:name="icon"
-				class="size-[18px]" />
+				class="size-[18px]"
+				:class="active ? 'text-white' : 'text-slate-500'" />
 		</span>
 
 		<!-- Label -->
 		<span
-			class="relative z-10 text-sm font-bold tracking-wide transition-all duration-300"
-			:class="active ? 'translate-x-1' : ''">
+			class="relative z-10 text-sm font-bold tracking-wide transition-colors duration-75"
+			:class="active ? 'text-white' : 'text-slate-500'">
 			{{ label }}
 		</span>
 

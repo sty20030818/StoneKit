@@ -1,5 +1,9 @@
-import type { ToolItem } from '../shared/types/tool'
+import type { ToolItem } from '@/shared/types/tool'
 
+/**
+ * 工具注册表：所有可用工具的配置信息
+ * 包含工具的 ID、名称、描述、图标、路由和分类等信息
+ */
 export const TOOL_REGISTRY: ToolItem[] = [
 	{
 		id: 'svg-base64',
@@ -76,19 +80,37 @@ export const TOOL_REGISTRY: ToolItem[] = [
 	},
 ]
 
+/**
+ * 获取所有工具
+ * @returns 所有工具的数组
+ */
 export function getTools() {
 	return TOOL_REGISTRY
 }
 
+/**
+ * 获取热门工具或收藏的工具
+ * @param favoriteIdSet 可选的收藏工具 ID 集合，如果提供则返回收藏的工具，否则返回热门工具
+ * @returns 过滤后的工具数组
+ */
 export function getHotTools(favoriteIdSet?: ReadonlySet<string>) {
 	if (!favoriteIdSet) return TOOL_REGISTRY.filter((t) => t.hot)
 	return TOOL_REGISTRY.filter((t) => favoriteIdSet.has(t.id))
 }
 
+/**
+ * 获取推荐工具
+ * @returns 标记为推荐的工具，如果没有则返回第一个工具
+ */
 export function getFeaturedTool() {
 	return TOOL_REGISTRY.find((t) => t.featured) ?? TOOL_REGISTRY[0]
 }
 
+/**
+ * 根据 ID 获取工具
+ * @param id 工具的唯一标识符
+ * @returns 匹配的工具，如果不存在则返回 undefined
+ */
 export function getToolById(id: string) {
 	return TOOL_REGISTRY.find((t) => t.id === id)
 }

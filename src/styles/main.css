@@ -1,28 +1,29 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-/* 全局背景色 */
+/* 全局背景色和滚动条隐藏 */
+html,
 body {
 	background-color: #f0f4f8;
+	overflow: hidden;
 }
 
-/* 自定义滚动条 */
-.custom-scrollbar::-webkit-scrollbar {
-	width: 4px;
+/* 隐藏所有滚动条：跨浏览器兼容 */
+* {
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE 和 Edge */
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-	background: transparent;
+*::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, Opera */
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-	background-color: #cbd5e1;
-	border-radius: 20px;
-}
+/* 自定义动画关键帧定义 */
 
-/* 自定义动画 keyframes */
+/* 波浪动画：左右摇摆效果 */
 @keyframes wave {
-	0%, 100% {
+	0%,
+	100% {
 		transform: rotate(0deg);
 	}
 	25% {
@@ -33,8 +34,10 @@ body {
 	}
 }
 
+/* 浮动动画：上下浮动效果 */
 @keyframes float {
-	0%, 100% {
+	0%,
+	100% {
 		transform: translateY(0);
 	}
 	50% {
@@ -42,6 +45,7 @@ body {
 	}
 }
 
+/* 滑入动画：从下往上淡入 */
 @keyframes slideUp {
 	from {
 		opacity: 0;

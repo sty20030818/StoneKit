@@ -20,8 +20,8 @@
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router'
-	import PageLayout from '../shared/components/PageLayout.vue'
-	import EmptyState from '../shared/components/EmptyState.vue'
+	import PageLayout from '@/shared/components/PageLayout.vue'
+	import EmptyState from '@/shared/components/EmptyState.vue'
 
 	const router = useRouter()
 </script>

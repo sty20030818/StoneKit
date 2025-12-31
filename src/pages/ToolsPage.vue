@@ -49,12 +49,12 @@
 <script setup lang="ts">
 	import { computed } from 'vue'
 
-	import PageLayout from '../shared/components/PageLayout.vue'
-	import EmptyState from '../shared/components/EmptyState.vue'
-	import ToolCard from '../components/ToolCard.vue'
+	import PageLayout from '@/shared/components/PageLayout.vue'
+	import EmptyState from '@/shared/components/EmptyState.vue'
+	import ToolCard from '@/components/ToolCard.vue'
 
-	import { getTools } from '../tools/registry'
-	import type { ToolCategory, ToolItem } from '../shared/types/tool'
+	import { getTools } from '@/tools/registry'
+	import type { ToolCategory, ToolItem } from '@/shared/types/tool'
 
 	const tools = computed(() => getTools())
 

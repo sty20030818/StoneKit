@@ -1,22 +1,29 @@
 <template>
-	<!-- Empty 状态 -->
-	<div
+	<!-- 空状态卡片：用于添加新工具 -->
+	<UCard
 		v-if="empty"
-		class="group relative bg-white/40 p-6 rounded-[28px] border border-dashed border-slate-300/80 hover:bg-white/70 transition-all duration-300 cursor-pointer hover:-translate-y-1.5 active:scale-[0.98] min-h-[168px] flex items-center justify-center"
+		:ui="{
+			root: 'group relative bg-white/40 p-4 rounded-[28px] border border-dashed border-slate-300/80 hover:bg-white/70 transition-all duration-300 cursor-pointer hover:-translate-y-1.5 active:scale-[0.98] h-full min-h-[208px] flex items-center justify-center divide-y-0',
+		}"
 		@click="handleClick">
 		<UIcon
 			name="i-lucide-plus"
 			class="size-10 text-slate-300 group-hover:text-teal-500 transition-colors" />
-	</div>
+	</UCard>
 
-	<!-- 正常工具卡片 -->
-	<div
+	<!-- 正常工具卡片：显示工具信息 -->
+	<UCard
 		v-else-if="tool"
-		class="group relative bg-white p-6 rounded-[28px] border border-slate-100/80 shadow-sm transition-all duration-300 cursor-pointer hover:-translate-y-1.5 hover:bg-white/90 active:scale-[0.98]"
-		:class="[getToolBorderClass(tool.id), getToolShadowClass(tool.id)]"
+		:ui="{
+			root: [
+				'group relative bg-white p-4 rounded-[28px] border border-slate-100/80 shadow-sm transition-all duration-300 cursor-pointer hover:-translate-y-1.5 hover:bg-white/90 active:scale-[0.98] flex flex-col divide-y-0',
+				getToolBorderClass(tool.id),
+				getToolShadowClass(tool.id),
+			].join(' '),
+		}"
 		@click="handleClick">
-		<div class="flex items-start justify-between mb-5">
-			<!-- Icon Container with Bouncy Animation -->
+		<div class="flex items-start justify-between mb-3">
+			<!-- 图标容器：带弹跳动画效果 -->
 			<div
 				class="w-14 h-14 rounded-[20px] flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-3 shadow-sm ring-4 ring-transparent group-hover:ring-white/50"
 				:class="getToolColorClass(tool.id)">
@@ -25,7 +32,7 @@
 					class="size-6 transition-transform duration-300 group-hover:scale-110" />
 			</div>
 
-			<!-- Arrow with Fade & Slide -->
+			<!-- 箭头图标：悬停时淡入和滑动效果 -->
 			<div
 				class="opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out delay-75">
 				<div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-teal-500 shadow-sm">
@@ -42,14 +49,14 @@
 		<p class="text-slate-400 text-xs leading-relaxed line-clamp-2 group-hover:text-slate-500 transition-colors">
 			{{ tool.description }}
 		</p>
-	</div>
+	</UCard>
 </template>
 
 <script setup lang="ts">
 	import { computed } from 'vue'
 	import { useRouter } from 'vue-router'
 
-	import type { ToolItem } from '../shared/types/tool'
+	import type { ToolItem } from '@/shared/types/tool'
 
 	type Props = {
 		tool?: ToolItem
@@ -78,6 +85,11 @@
 		}
 	}
 
+	/**
+	 * 根据工具 ID 获取对应的颜色样式类
+	 * @param toolId 工具的唯一标识符
+	 * @returns 对应的 Tailwind CSS 颜色类名
+	 */
 	function getToolColorClass(toolId: string): string {
 		const colorMap: Record<string, string> = {
 			'json-format': 'bg-blue-50 text-blue-600',
@@ -92,6 +104,11 @@
 		return colorMap[toolId] || 'bg-slate-50 text-slate-600'
 	}
 
+	/**
+	 * 根据工具 ID 获取对应的边框样式类
+	 * @param toolId 工具的唯一标识符
+	 * @returns 对应的 Tailwind CSS 边框类名
+	 */
 	function getToolBorderClass(toolId: string): string {
 		const borderMap: Record<string, string> = {
 			'json-format': 'hover:border-blue-200',
@@ -106,6 +123,11 @@
 		return borderMap[toolId] || 'hover:border-slate-200'
 	}
 
+	/**
+	 * 根据工具 ID 获取对应的阴影样式类
+	 * @param toolId 工具的唯一标识符
+	 * @returns 对应的 Tailwind CSS 阴影类名
+	 */
 	function getToolShadowClass(toolId: string): string {
 		const shadowMap: Record<string, string> = {
 			'json-format': 'hover:shadow-blue-500/20',

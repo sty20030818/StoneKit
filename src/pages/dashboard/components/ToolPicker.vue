@@ -50,8 +50,8 @@
 <script setup lang="ts">
 	import { computed } from 'vue'
 
-	import type { ToolItem } from '../../../shared/types/tool'
-	import EmptyState from '../../../shared/components/EmptyState.vue'
+	import type { ToolItem } from '@/shared/types/tool'
+	import EmptyState from '@/shared/components/EmptyState.vue'
 
 	type Props = {
 		open: boolean

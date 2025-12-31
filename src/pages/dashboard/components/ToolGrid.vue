@@ -14,7 +14,7 @@
 			</button>
 		</div>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch">
 			<template v-if="isLoading">
 				<ToolCardSkeleton
 					v-for="index in skeletonCount"
@@ -44,12 +44,12 @@
 <script setup lang="ts">
 	import { computed } from 'vue'
 
-	import type { ToolItem } from '../../../shared/types/tool'
-	import EmptyState from '../../../shared/components/EmptyState.vue'
-	import ToolCard from '../../../components/ToolCard.vue'
-	import ToolCardSkeleton from '../../../shared/components/ToolCardSkeleton.vue'
+	import type { ToolItem } from '@/shared/types/tool'
+	import EmptyState from '@/shared/components/EmptyState.vue'
+	import ToolCard from '@/components/ToolCard.vue'
+	import ToolCardSkeleton from '@/shared/components/ToolCardSkeleton.vue'
 
-	interface Props {
+	type Props = {
 		tools: ToolItem[]
 		isLoading?: boolean
 	}
