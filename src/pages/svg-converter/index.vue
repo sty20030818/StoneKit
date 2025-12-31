@@ -1,28 +1,30 @@
 <template>
-	<PageLayout>
-		<div class="grid gap-8 lg:grid-cols-2 h-full">
+	<ToolPageLayout>
+		<div class="grid gap-[clamp(1rem,2vw,1.5rem)] lg:grid-cols-2 h-full">
 			<!-- 左侧：输入区域 -->
-			<div class="flex flex-col min-h-0">
+			<div class="flex flex-col min-h-0 h-full">
 				<SvgInputCard v-model="svgInput" />
 			</div>
 
 			<!-- 右侧：预览 + 输出 -->
-			<div class="flex flex-col gap-6 min-h-0">
+			<div class="flex flex-col gap-[clamp(0.75rem,1.5vw,1rem)] min-h-0 h-full">
 				<SvgPreview
 					:svg-input="svgInput"
-					:data-url="dataUrl" />
+					:data-url="dataUrl"
+					class="flex-1" />
 
 				<Base64Output
 					:data-url="dataUrl"
-					:loading="loading" />
+					:loading="loading"
+					class="flex-1" />
 			</div>
 		</div>
-	</PageLayout>
+	</ToolPageLayout>
 </template>
 
 <script setup lang="ts">
 	import { ref, watch } from 'vue'
-	import PageLayout from '@/shared/components/PageLayout.vue'
+	import ToolPageLayout from '@/shared/components/ToolPageLayout.vue'
 	import SvgInputCard from './components/SvgInputCard.vue'
 	import SvgPreview from './components/SvgPreview.vue'
 	import Base64Output from './components/Base64Output.vue'

@@ -1,10 +1,10 @@
 <template>
 	<UCard
 		:ui="{
-			root: 'bg-white rounded-3xl border border-slate-100/80 shadow-sm flex flex-col divide-y-0',
-			header: 'px-6 py-4 border-b border-slate-100',
-			body: 'p-6 flex-1',
-			footer: 'px-6 py-4 border-t border-slate-100',
+			root: 'bg-white rounded-3xl border border-slate-100/80 shadow-sm h-full flex flex-col divide-y-0',
+			header: 'px-6 py-4 border-b border-slate-100 shrink-0',
+			body: 'p-6 flex-1 min-h-0',
+			footer: 'px-6 py-4 border-t border-slate-100 shrink-0',
 		}">
 		<template #header>
 			<div class="flex items-center justify-between">

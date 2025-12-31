@@ -1,9 +1,9 @@
 <template>
 	<UCard
 		:ui="{
-			root: 'bg-white rounded-3xl border border-slate-100/80 shadow-sm flex flex-col divide-y-0',
-			header: 'px-6 py-4 border-b border-slate-100',
-			body: 'p-6 flex-1',
+			root: 'bg-white rounded-3xl border border-slate-100/80 shadow-sm h-full flex flex-col divide-y-0',
+			header: 'px-6 py-4 border-b border-slate-100 shrink-0',
+			body: 'p-6 flex-1 min-h-0',
 		}">
 		<template #header>
 			<div class="flex items-center justify-between">
@@ -24,7 +24,7 @@
 		</template>
 
 		<div
-			class="flex h-full min-h-[300px] items-center justify-center rounded-2xl ring-1 ring-slate-200 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGgxMHYxMEgweiIgZmlsbD0iI2U1ZTdlYiIvPjxwYXRoIGQ9Ik0xMCAwaDEwdjEwSDEweiIgZmlsbD0iI2YzZjRmNiIvPjxwYXRoIGQ9Ik0wIDEwaDEwdjEwSDB6IiBmaWxsPSIjZjNmNGY2Ii8+PHBhdGggZD0iTTEwIDEwaDEwdjEwSDEweiIgZmlsbD0iI2U1ZTdlYiIvPjwvc3ZnPg==')] bg-size-[20px_20px]">
+			class="flex h-full items-center justify-center rounded-2xl ring-1 ring-slate-200 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGgxMHYxMEgweiIgZmlsbD0iI2U1ZTdlYiIvPjxwYXRoIGQ9Ik0xMCAwaDEwdjEwSDEweiIgZmlsbD0iI2YzZjRmNiIvPjxwYXRoIGQ9Ik0wIDEwaDEwdjEwSDB6IiBmaWxsPSIjZjNmNGY2Ii8+PHBhdGggZD0iTTEwIDEwaDEwdjEwSDEweiIgZmlsbD0iI2U1ZTdlYiIvPjwvc3ZnPg==')] bg-size-[20px_20px]">
 			<Transition
 				name="preview"
 				mode="out-in">
