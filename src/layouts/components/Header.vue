@@ -5,33 +5,68 @@
 		<div class="max-w-[1400px] mx-auto px-6 md:px-8">
 			<div
 				class="bg-white/70 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.03)] ring-1 ring-white/50 rounded-full px-6 py-3 flex items-center justify-between hover:shadow-[0_10px_40px_rgba(0,0,0,0.05)] hover:bg-white/80 transition-all">
-				<!-- 左侧标题 -->
-				<div class="flex items-center gap-4 pl-2">
-					<UButton
-						v-if="route.path !== '/'"
-						variant="ghost"
-						size="sm"
-						:ui="{
-							base: 'p-2 -ml-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors active:scale-90',
-						}"
-						@click="$router.push('/')">
-						<UIcon
-							name="i-lucide-chevron-right"
-							class="size-4.5 rotate-180" />
-					</UButton>
-
-					<h1 class="text-xl font-bold text-slate-700 tracking-tight flex items-center gap-2">
-						<template v-if="route.path === '/'">
-							<span class="bg-linear-to-r from-teal-500 to-emerald-500 text-transparent bg-clip-text">
-								你来啦~石头鱼!
+				<!-- 左侧：增强面包屑导航 -->
+				<div class="flex items-center">
+					<template v-if="route.path === '/'">
+						<div class="flex items-center gap-2">
+							<span class="bg-linear-to-r from-teal-600 to-emerald-600 text-transparent bg-clip-text text-lg font-bold">
+								你来啦~石头鱼
 							</span>
-						</template>
-						<template v-else>
-							<span class="text-slate-400 font-medium text-sm">{{ currentTool?.category }}</span>
-							<span class="text-slate-300">/</span>
-							<span>{{ currentTool?.name }}</span>
-						</template>
-					</h1>
+							<span class="text-xl animate-wave origin-bottom-right">👋</span>
+						</div>
+					</template>
+					<template v-else-if="route.path === '/tools'">
+						<div class="flex items-center gap-2 text-sm">
+							<UButton
+								variant="ghost"
+								size="sm"
+								:ui="{
+									base: 'flex items-center gap-1.5 px-2 py-1 rounded-lg text-emerald-600 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300 transition-all active:scale-95 shadow-sm',
+								}"
+								@click="$router.push('/')">
+								<UIcon
+									name="i-lucide-home"
+									class="size-3.5" />
+								<span class="font-medium">首页</span>
+							</UButton>
+
+							<UIcon
+								name="i-lucide-chevron-right"
+								class="size-3.5 text-slate-300" />
+
+							<span class="px-2 py-1 font-bold text-slate-800">所有工具</span>
+						</div>
+					</template>
+					<template v-else>
+						<div class="flex items-center gap-2 text-sm">
+							<UButton
+								variant="ghost"
+								size="sm"
+								:ui="{
+									base: 'flex items-center gap-1.5 px-2 py-1 rounded-lg text-emerald-600 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300 transition-all active:scale-95 shadow-sm',
+								}"
+								@click="$router.push('/')">
+								<UIcon
+									name="i-lucide-home"
+									class="size-3.5" />
+								<span class="font-medium">首页</span>
+							</UButton>
+
+							<UIcon
+								name="i-lucide-chevron-right"
+								class="size-3.5 text-slate-300" />
+
+							<span class="px-2 py-1 rounded-lg text-teal-700 bg-teal-50 border border-teal-200 font-medium shadow-sm">
+								{{ currentTool?.category }}
+							</span>
+
+							<UIcon
+								name="i-lucide-chevron-right"
+								class="size-3.5 text-slate-300" />
+
+							<span class="px-2 py-1 font-bold text-slate-800">{{ currentTool?.name }}</span>
+						</div>
+					</template>
 				</div>
 
 				<!-- 右侧操作按钮 -->
