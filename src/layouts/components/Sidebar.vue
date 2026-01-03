@@ -1,6 +1,6 @@
 <template>
 	<aside
-		class="w-[270px] shrink-0 my-4 ml-4 flex flex-col z-50 rounded-[36px] bg-white/70 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-white/50 transition-all hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)]">
+		class="w-[270px] shrink-0 mt-4 mb-8 ml-8 flex flex-col z-50 rounded-[36px] bg-white/70 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-white/50 transition-all hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)]">
 		<!-- Logo -->
 		<div class="h-24 flex items-center px-7">
 			<div

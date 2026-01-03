@@ -19,10 +19,10 @@ export function useSvgDimensions() {
 
 	const formatDimensions = (dimensions: SvgDimensions): string | null => {
 		if (dimensions.width && dimensions.height) {
-			// 移除单位或添加 px
+			// 移除单位
 			const width = dimensions.width.replace(/px$/, '') || dimensions.width
 			const height = dimensions.height.replace(/px$/, '') || dimensions.height
-			return `${width}px x ${height}px`
+			return `${width} x ${height}`
 		}
 
 		if (dimensions.viewBox) {
@@ -31,7 +31,7 @@ export function useSvgDimensions() {
 			if (parts.length >= 4) {
 				const width = parts[2]
 				const height = parts[3]
-				return `${width}px x ${height}px`
+				return `${width} x ${height}`
 			}
 		}
 

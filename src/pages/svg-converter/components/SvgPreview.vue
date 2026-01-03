@@ -23,8 +23,7 @@
 			</div>
 		</template>
 
-		<div
-			class="flex h-full items-center justify-center rounded-2xl ring-1 ring-slate-200 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGgxMHYxMEgweiIgZmlsbD0iI2U1ZTdlYiIvPjxwYXRoIGQ9Ik0xMCAwaDEwdjEwSDEweiIgZmlsbD0iI2YzZjRmNiIvPjxwYXRoIGQ9Ik0wIDEwaDEwdjEwSDB6IiBmaWxsPSIjZjNmNGY2Ii8+PHBhdGggZD0iTTEwIDEwaDEwdjEwSDEweiIgZmlsbD0iI2U1ZTdlYiIvPjwvc3ZnPg==')] bg-size-[20px_20px]">
+		<div class="flex h-full items-center justify-center rounded-2xl ring-1 ring-slate-200 checkerboard-bg">
 			<Transition
 				name="preview"
 				mode="out-in">
@@ -33,17 +32,17 @@
 					:key="dataUrl"
 					:src="dataUrl"
 					alt="SVG 预览"
-					class="max-h-full max-w-full object-contain" />
+					class="w-60 h-60 object-contain transition-transform duration-300 hover:scale-105 relative z-10" />
 				<div
 					v-else
 					key="empty"
 					class="text-center">
 					<div class="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-3">
 						<UIcon
-							name="i-lucide-image"
+							name="i-lucide-file-image"
 							class="size-8 text-slate-400" />
 					</div>
-					<p class="text-sm text-slate-500 font-medium">等待输入…</p>
+					<span class="text-sm text-slate-500 font-medium">等待输入…</span>
 				</div>
 			</Transition>
 		</div>
@@ -71,6 +70,20 @@
 </script>
 
 <style scoped>
+	/* 棋盘格背景 - CSS 渐变 */
+	.checkerboard-bg {
+		background-color: #ffffff;
+		background-image:
+			linear-gradient(45deg, #f1f5f9 25%, transparent 25%), linear-gradient(-45deg, #f1f5f9 25%, transparent 25%),
+			linear-gradient(45deg, transparent 75%, #f1f5f9 75%), linear-gradient(-45deg, transparent 75%, #f1f5f9 75%);
+		background-size: 16px 16px;
+		background-position:
+			0 0,
+			0 8px,
+			8px -8px,
+			-8px 0px;
+	}
+
 	.preview-enter-active,
 	.preview-leave-active {
 		transition: opacity 0.3s ease;
