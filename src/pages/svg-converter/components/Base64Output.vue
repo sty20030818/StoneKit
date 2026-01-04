@@ -2,14 +2,15 @@
 	<UCard
 		:ui="{
 			root: 'bg-white/70 backdrop-blur-xl rounded-3xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-white/50 h-full flex flex-col divide-y-0 transition-all hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)]',
-			header: 'px-6 pt-3 border-b border-white/40 shrink-0',
-			body: 'px-6 flex-1 min-h-0 flex flex-col',
+			header: 'px-6 pt-3 pb-0 border-b border-white/40 shrink-0',
+			body: 'px-6 pt-0 flex-1 min-h-0 flex flex-col',
 			footer: 'px-6 pt-2 pb-4 shrink-0',
 		}">
 		<template #header>
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">
-					<div class="w-8 h-8 rounded-xl bg-teal-50 flex items-center justify-center">
+					<div
+						class="w-8 h-8 rounded-xl bg-linear-to-br from-teal-400/20 via-emerald-300/15 to-teal-200/10 backdrop-blur-sm ring-1 ring-teal-200/40 shadow-sm shadow-teal-500/10 flex items-center justify-center">
 						<UIcon
 							name="i-lucide-code-2"
 							class="size-4 text-teal-600" />
@@ -19,13 +20,16 @@
 				<div class="flex items-center gap-2">
 					<div
 						:class="[
-							'px-3 py-1 rounded-full text-xs font-medium transition-colors',
+							'px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 flex items-center gap-1.5',
 							loading
-								? 'bg-amber-50 text-amber-700'
+								? 'bg-linear-to-r from-amber-50 to-orange-50 text-amber-700 animate-pulse'
 								: dataUrl
-									? 'bg-teal-50 text-teal-700'
+									? 'bg-linear-to-r from-teal-50 to-emerald-50 text-teal-700 ring-1 ring-teal-200/50'
 									: 'bg-slate-100 text-slate-500',
 						]">
+						<span
+							v-if="dataUrl && !loading"
+							class="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
 						{{ loading ? '生成中…' : dataUrl ? '就绪' : '等待输入' }}
 					</div>
 					<div
@@ -47,37 +51,23 @@
 			@click="() => dataUrl && !loading && handleCopy('url')">
 			<div
 				:class="[
-					'font-mono text-xs whitespace-pre-wrap wrap-break-word select-text w-full px-4 pt-2 pb-4 text-left',
+					'font-mono text-xs whitespace-pre-wrap break-all select-text w-full px-4 pt-2 pb-4 text-left overflow-hidden',
 					dataUrl ? 'text-slate-700' : 'text-slate-400',
 				]">
 				{{ dataUrl || '输出会出现在这里…' }}
 			</div>
 
-			<!-- Hover 遮罩 -->
+			<!-- 复制成功反馈 -->
 			<div
-				v-if="dataUrl && !loading && copyStatus !== 'url'"
-				class="absolute inset-0 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-				<div class="text-slate-700 text-sm font-medium flex items-center gap-2">
+				v-if="copyStatus === 'url' || copyStatus === 'css'"
+				class="absolute inset-0 bg-teal-50/95 backdrop-blur-sm rounded-xl flex items-center justify-center pointer-events-none">
+				<div class="text-teal-700 flex items-center gap-2">
 					<UIcon
-						name="i-lucide-copy"
-						class="size-4" />
-					点击复制
+						name="i-lucide-check-circle-2"
+						class="size-5" />
+					<span class="text-sm font-semibold">已复制</span>
 				</div>
 			</div>
-
-			<!-- 复制成功动画 -->
-			<Transition name="copy-success">
-				<div
-					v-if="copyStatus === 'url'"
-					class="absolute inset-0 bg-teal-50/95 backdrop-blur-sm rounded-xl flex items-center justify-center pointer-events-none border-2 border-teal-300">
-					<div class="text-teal-700 flex items-center gap-2">
-						<UIcon
-							name="i-lucide-check-circle-2"
-							class="size-5" />
-						<span class="text-sm font-semibold">已复制</span>
-					</div>
-				</div>
-			</Transition>
 
 			<!-- Loading 状态 -->
 			<div
@@ -100,7 +90,9 @@
 						'flex-1 px-5 py-3 rounded-full text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group',
 						copyStatus === 'url'
 							? 'bg-linear-to-br from-teal-600 via-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/40 ring-2 ring-teal-400/30 scale-[1.02]'
-							: 'bg-linear-to-br from-teal-400 to-emerald-400 text-white shadow-md shadow-teal-500/30 hover:from-teal-500 hover:to-emerald-500 hover:shadow-lg hover:shadow-teal-500/40 hover:scale-[1.02] active:scale-[0.98]',
+							: dataUrl && !loading
+								? 'bg-linear-to-br from-teal-400 to-emerald-400 text-white shadow-md shadow-teal-500/30 hover:from-teal-500 hover:to-emerald-500 hover:shadow-lg hover:shadow-teal-500/40 hover:scale-[1.02] active:scale-[0.98] animate-breathe'
+								: 'bg-linear-to-br from-teal-400 to-emerald-400 text-white shadow-md shadow-teal-500/30',
 					]"
 					@click="() => handleCopy('url')">
 					<UIcon
@@ -120,24 +112,21 @@
 				<button
 					:disabled="!dataUrl || loading"
 					:class="[
-						'px-5 py-3 rounded-full text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group border-2',
+						'w-16 h-12 rounded-full text-sm font-semibold transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed border-2',
 						copyStatus === 'css'
-							? 'bg-linear-to-br from-teal-50 to-teal-100 text-teal-700 border-teal-300 ring-2 ring-teal-200/50 shadow-md shadow-teal-200/30 scale-[1.02]'
-							: 'bg-white text-slate-600 border-slate-200 hover:bg-linear-to-br hover:from-slate-50 hover:to-white hover:border-slate-300 hover:shadow-md hover:shadow-slate-200/30 hover:scale-[1.02] active:scale-[0.98]',
+							? 'bg-teal-50 text-teal-700 border-teal-300'
+							: 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:border-slate-300',
 					]"
 					@click="() => handleCopy('css')">
 					<UIcon
 						v-if="copyStatus === 'css'"
 						name="i-lucide-check"
-						class="size-4 relative z-10" />
+						class="size-4" />
 					<span
 						v-else
-						class="relative z-10 font-medium">
+						class="font-medium">
 						CSS
 					</span>
-					<div
-						v-if="copyStatus === 'css'"
-						class="absolute inset-0 bg-linear-to-r from-teal-200/20 via-transparent to-teal-200/20 pointer-events-none" />
 				</button>
 			</div>
 		</template>
@@ -160,30 +149,3 @@
 		await copy(props.dataUrl, format)
 	}
 </script>
-
-<style scoped>
-	.copy-success-enter-active,
-	.copy-success-leave-active {
-		transition: all 0.2s ease;
-	}
-
-	.copy-success-enter-from {
-		opacity: 0;
-		transform: scale(0.8);
-	}
-
-	.copy-success-enter-to {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	.copy-success-leave-from {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	.copy-success-leave-to {
-		opacity: 0;
-		transform: scale(0.8);
-	}
-</style>

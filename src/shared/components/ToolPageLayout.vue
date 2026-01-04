@@ -1,5 +1,5 @@
 <template>
-	<div class="pl-8 pr-8 pt-8 h-[calc(100dvh-7rem)] overflow-hidden">
+	<div class="px-8 py-8 flex-1 min-h-0 overflow-hidden">
 		<div class="h-full">
 			<slot />
 		</div>

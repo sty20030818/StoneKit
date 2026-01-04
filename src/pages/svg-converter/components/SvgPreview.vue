@@ -2,13 +2,14 @@
 	<UCard
 		:ui="{
 			root: 'bg-white/70 backdrop-blur-xl rounded-3xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-white/50 h-full flex flex-col divide-y-0 transition-all hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)]',
-			header: 'px-6 border-b border-white/40 shrink-0',
-			body: 'px-6 pb-6 flex-1 min-h-0',
+			header: 'px-6 pt-3 pb-0 border-b border-white/40 shrink-0',
+			body: 'px-6 pt-0 pb-6 flex-1 min-h-0',
 		}">
 		<template #header>
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">
-					<div class="w-8 h-8 rounded-xl bg-teal-50 flex items-center justify-center">
+					<div
+						class="w-8 h-8 rounded-xl bg-linear-to-br from-teal-400/20 via-emerald-300/15 to-teal-200/10 backdrop-blur-sm ring-1 ring-teal-200/40 shadow-sm shadow-teal-500/10 flex items-center justify-center">
 						<UIcon
 							name="i-lucide-eye"
 							class="size-4 text-teal-600" />
@@ -70,18 +71,19 @@
 </script>
 
 <style scoped>
-	/* 棋盘格背景 - CSS 渐变 */
+	/* 棋盘格背景 - 更精致的 12px 格子 + 内阴影深度 */
 	.checkerboard-bg {
-		background-color: #ffffff;
+		background-color: #fafbfc;
 		background-image:
 			linear-gradient(45deg, #f1f5f9 25%, transparent 25%), linear-gradient(-45deg, #f1f5f9 25%, transparent 25%),
 			linear-gradient(45deg, transparent 75%, #f1f5f9 75%), linear-gradient(-45deg, transparent 75%, #f1f5f9 75%);
-		background-size: 16px 16px;
+		background-size: 12px 12px;
 		background-position:
 			0 0,
-			0 8px,
-			8px -8px,
-			-8px 0px;
+			0 6px,
+			6px -6px,
+			-6px 0px;
+		box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.03);
 	}
 
 	.preview-enter-active,

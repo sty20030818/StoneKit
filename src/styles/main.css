@@ -73,3 +73,18 @@ body {
 .animate-slideUp {
 	animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* 呼吸动画：按钮待机时的微妙阴影脉动 */
+@keyframes breathe {
+	0%,
+	100% {
+		box-shadow: 0 4px 20px rgba(20, 184, 166, 0.3);
+	}
+	50% {
+		box-shadow: 0 6px 28px rgba(20, 184, 166, 0.45);
+	}
+}
+
+.animate-breathe {
+	animation: breathe 3s ease-in-out infinite;
+}

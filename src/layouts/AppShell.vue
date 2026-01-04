@@ -14,19 +14,21 @@
 			<Sidebar class="hidden lg:flex" />
 
 			<div class="flex flex-col flex-1 min-h-0 min-w-0">
-				<main class="min-w-0 flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar">
+				<main class="min-w-0 flex-1 flex flex-col overflow-hidden">
 					<Header />
-					<RouterView v-slot="{ Component, route }">
-						<Transition
-							name="slide"
-							mode="out-in">
-							<div
-								:key="route.path"
-								class="min-h-full">
-								<component :is="Component" />
-							</div>
-						</Transition>
-					</RouterView>
+					<div class="flex-1 min-h-0 overflow-y-auto overflow-x-hidden custom-scrollbar">
+						<RouterView v-slot="{ Component, route }">
+							<Transition
+								name="slide"
+								mode="out-in">
+								<div
+									:key="route.path"
+									class="flex flex-col h-full min-h-0">
+									<component :is="Component" />
+								</div>
+							</Transition>
+						</RouterView>
+					</div>
 				</main>
 			</div>
 		</div>
