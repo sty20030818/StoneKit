@@ -14,9 +14,19 @@
 			<Sidebar class="hidden lg:flex" />
 
 			<div class="flex flex-col flex-1 min-h-0 min-w-0">
-				<main class="min-w-0 flex-1 overflow-y-auto custom-scrollbar">
+				<main class="min-w-0 flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar">
 					<Header />
-					<RouterView />
+					<RouterView v-slot="{ Component, route }">
+						<Transition
+							name="slide"
+							mode="out-in">
+							<div
+								:key="route.path"
+								class="min-h-full">
+								<component :is="Component" />
+							</div>
+						</Transition>
+					</RouterView>
 				</main>
 			</div>
 		</div>
@@ -34,3 +44,36 @@
 	const dashboardSearchOpen = ref(false)
 	provide('dashboardSearchOpen', dashboardSearchOpen)
 </script>
+
+<style>
+	/* 页面滑动转场动画：左滑进、右滑出 */
+	.slide-enter-active,
+	.slide-leave-active {
+		transition:
+			transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	/* 进入前状态：从左侧进入 */
+	.slide-enter-from {
+		transform: translateX(-80px);
+		opacity: 0;
+	}
+
+	/* 进入后状态 */
+	.slide-enter-to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+
+	/* 离开后状态：向右侧退出 */
+	.slide-leave-from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+
+	.slide-leave-to {
+		transform: translateX(80px);
+		opacity: 0;
+	}
+</style>
