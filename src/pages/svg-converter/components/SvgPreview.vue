@@ -1,9 +1,9 @@
 <template>
 	<UCard
 		:ui="{
-			root: 'bg-white rounded-3xl border border-slate-100/80 shadow-sm h-full flex flex-col divide-y-0',
-			header: 'px-6 py-4 border-b border-slate-100 shrink-0',
-			body: 'p-6 flex-1 min-h-0',
+			root: 'bg-white/70 backdrop-blur-xl rounded-3xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-white/50 h-full flex flex-col divide-y-0 transition-all hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)]',
+			header: 'px-6 border-b border-white/40 shrink-0',
+			body: 'px-6 pb-6 flex-1 min-h-0',
 		}">
 		<template #header>
 			<div class="flex items-center justify-between">

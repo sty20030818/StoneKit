@@ -14,12 +14,12 @@
 				<SvgPreview
 					:svg-input="svgInput"
 					:data-url="dataUrl"
-					class="flex-3" />
+					class="flex-2" />
 
 				<Base64Output
 					:data-url="dataUrl"
 					:loading="loading"
-					class="flex-2" />
+					class="flex-1" />
 			</div>
 		</div>
 	</ToolPageLayout>

@@ -1,9 +1,9 @@
 <template>
 	<UCard
 		:ui="{
-			root: 'bg-white rounded-3xl border border-slate-100/80 shadow-sm h-full flex flex-col divide-y-0',
-			header: 'px-6 py-4 border-b border-slate-100 shrink-0',
-			body: 'flex-1 flex flex-col min-h-0 p-6',
+			root: 'bg-white/70 backdrop-blur-xl rounded-3xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-white/50 h-full flex flex-col divide-y-0 transition-all hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)]',
+			header: 'px-6 border-b border-white/40 shrink-0',
+			body: 'px-6 pb-2 flex-1 flex flex-col min-h-0',
 		}">
 		<template #header>
 			<div class="flex items-center justify-between">
@@ -30,14 +30,14 @@
 		<!-- 粘贴代码模式 -->
 		<div
 			v-if="mode === 'paste'"
-			class="flex-1 flex flex-col min-h-0 relative">
+			class="flex-1 flex flex-col min-h-0">
 			<UTextarea
 				:model-value="modelValue"
 				placeholder="<!-- 请在此处粘贴您的 SVG 代码 -->"
 				autoresize
 				:rows="20"
 				:ui="{
-					root: 'flex-1 min-h-0 rounded-none border-0',
+					root: 'flex-1 min-h-0 rounded-none border-0 mb-2',
 					base: 'font-mono text-sm leading-loose resize-none h-full border-0 rounded-none bg-transparent px-0 py-0 focus:ring-0 focus:outline-none focus:border-0 hover:ring-0 hover:border-0 active:ring-0 active:border-0 placeholder:text-slate-300',
 					wrapper: 'h-full rounded-none border-0',
 				}"
@@ -45,7 +45,7 @@
 
 			<!-- 底部状态栏 -->
 			<div
-				class="absolute bottom-0 left-0 right-0 h-9 bg-white border-t border-slate-50 flex items-center justify-between px-6 text-xs font-mono text-slate-400 select-none">
+				class="h-8 border-t border-white/30 flex items-center justify-between px-6 text-xs font-mono text-slate-400 select-none shrink-0">
 				<span>{{ fileSize }}</span>
 				<span class="text-teal-600">{{ charCount }} 字符</span>
 			</div>
@@ -59,38 +59,16 @@
 				v-model="files"
 				accept=".svg,image/svg+xml"
 				:multiple="false"
-				class="flex-1 min-h-0">
-				<template #default="{ isDragging, open }">
-					<div
-						:class="[
-							'flex flex-col items-center justify-center h-full min-h-[400px] rounded-2xl border-2 border-dashed transition-all cursor-pointer',
-							isDragging
-								? 'border-teal-400 bg-teal-50/50 shadow-lg shadow-teal-500/10'
-								: 'border-slate-200 hover:border-teal-300 hover:bg-slate-50/50',
-						]"
-						@click="open()">
-						<div
-							:class="[
-								'mb-4 size-16 rounded-2xl flex items-center justify-center transition-all',
-								isDragging
-									? 'bg-teal-100 text-teal-600 scale-110'
-									: 'bg-slate-100 text-slate-400 group-hover:bg-teal-50 group-hover:text-teal-500',
-							]">
-							<UIcon
-								name="i-lucide-upload"
-								class="size-8" />
-						</div>
-						<p
-							:class="[
-								'mb-2 text-base font-semibold transition-colors',
-								isDragging ? 'text-teal-700' : 'text-slate-700',
-							]">
-							{{ isDragging ? '松手即可上传' : '点击或拖拽文件到此处上传' }}
-						</p>
-						<p class="text-sm text-slate-500">支持 SVG 文件</p>
-					</div>
-				</template>
-			</UFileUpload>
+				variant="area"
+				icon="i-lucide-upload"
+				label="点击或拖拽文件到此处上传"
+				description="支持 SVG 文件"
+				:preview="true"
+				:ui="{
+					root: 'flex-1 min-h-0',
+					base: 'min-h-[400px] rounded-2xl',
+				}"
+				class="flex-1 min-h-0" />
 		</div>
 	</UCard>
 </template>
@@ -112,7 +90,7 @@
 	const props = defineProps<Props>()
 	const emit = defineEmits<Emits>()
 
-	const files = ref<File[]>([])
+	const files = ref<File | null>(null)
 
 	const handleInput = (value: string) => {
 		emit('update:modelValue', value)
@@ -139,12 +117,16 @@
 		return `${size.toFixed(2)} KB`
 	})
 
-	watch(files, (newFiles) => {
-		if (newFiles.length > 0) {
-			void handleFileSelect(newFiles[0])
-			files.value = []
-		}
-	})
+	watch(
+		files,
+		(newFile, oldFile) => {
+			// 只在文件真正变化时处理（避免从 null 到 null 的触发）
+			if (newFile && newFile !== oldFile) {
+				void handleFileSelect(newFile)
+			}
+		},
+		{ immediate: false },
+	)
 </script>
 
 <style scoped>

@@ -6,7 +6,7 @@ export function useSvgFileUpload(onFileRead: (content: string) => void) {
 	const isDragging = ref(false)
 	const toast = useToast()
 
-	const handleFileSelect = async (file: File | null) => {
+	const handleFileSelect = async (file: File | null): Promise<void> => {
 		if (!file) return
 
 		try {
@@ -18,6 +18,7 @@ export function useSvgFileUpload(onFileRead: (content: string) => void) {
 				description: error instanceof Error ? error.message : String(error),
 				color: 'red',
 			})
+			throw error
 		}
 	}
 

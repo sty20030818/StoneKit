@@ -20,7 +20,11 @@ export async function readFileAsText(file: File): Promise<string> {
 }
 
 export async function readSvgFile(file: File): Promise<string> {
-	if (!file.type.includes('svg')) {
+	// 检查文件类型（MIME type）或文件扩展名
+	const isValidSvg =
+		file.type.includes('svg') || file.type === 'image/svg+xml' || file.name.toLowerCase().endsWith('.svg')
+
+	if (!isValidSvg) {
 		throw new Error('只支持 SVG 文件')
 	}
 
