@@ -88,3 +88,8 @@ body {
 .animate-breathe {
 	animation: breathe 3s ease-in-out infinite;
 }
+
+/* Toaster 位置调整：下移以避免遮住 header */
+[data-sonner-toaster][data-position="top-right"] {
+	top: 80px !important;
+}

@@ -9,6 +9,7 @@
         "@iconify/vue": "^5.0.0",
         "@nuxt/ui": "^4.3.0",
         "@tauri-apps/api": "^2.9.1",
+        "@tauri-apps/plugin-dialog": "^2.4.2",
         "@tauri-apps/plugin-opener": "^2.5.2",
         "@vueuse/motion": "^3.0.3",
         "pinia": "^3.0.4",
@@ -288,6 +289,8 @@
     "@tauri-apps/cli-win32-ia32-msvc": ["@tauri-apps/cli-win32-ia32-msvc@2.9.6", "https://registry.npmmirror.com/@tauri-apps/cli-win32-ia32-msvc/-/cli-win32-ia32-msvc-2.9.6.tgz", { "os": "win32", "cpu": "ia32" }, "sha512-S4pT0yAJgFX8QRCyKA1iKjZ9Q/oPjCZf66A/VlG5Yw54Nnr88J1uBpmenINbXxzyhduWrIXBaUbEY1K80ZbpMg=="],
 
     "@tauri-apps/cli-win32-x64-msvc": ["@tauri-apps/cli-win32-x64-msvc@2.9.6", "https://registry.npmmirror.com/@tauri-apps/cli-win32-x64-msvc/-/cli-win32-x64-msvc-2.9.6.tgz", { "os": "win32", "cpu": "x64" }, "sha512-ldWuWSSkWbKOPjQMJoYVj9wLHcOniv7diyI5UAJ4XsBdtaFB0pKHQsqw/ItUma0VXGC7vB4E9fZjivmxur60aw=="],
+
+    "@tauri-apps/plugin-dialog": ["@tauri-apps/plugin-dialog@2.4.2", "https://registry.npmmirror.com/@tauri-apps/plugin-dialog/-/plugin-dialog-2.4.2.tgz", { "dependencies": { "@tauri-apps/api": "^2.8.0" } }, "sha512-lNIn5CZuw8WZOn8zHzmFmDSzg5zfohWoa3mdULP0YFh/VogVdMVWZPcWSHlydsiJhRQYaTNSYKN7RmZKE2lCYQ=="],
 
     "@tauri-apps/plugin-opener": ["@tauri-apps/plugin-opener@2.5.2", "https://registry.npmmirror.com/@tauri-apps/plugin-opener/-/plugin-opener-2.5.2.tgz", { "dependencies": { "@tauri-apps/api": "2.9.1" } }, "sha512-ei/yRRoCklWHImwpCcDK3VhNXx+QXM9793aQ64YxpqVF0BDuuIlXhZgiAkc15wnPVav+IbkYhmDJIv5R326Mew=="],
 
